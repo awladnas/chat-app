@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CableChat</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="main-container" class="container">
+      <div class="row">
+        <div id="sidebar" class="col-xs-3">
+          <div class="container">
+            <%= link_to image_tag('icon.png', width: '80px'), root_path, id: "logo" %>
+            <nav>
+              <ul class="nav navbar-nav navbar-right">
+                <% if user_signed_in? %>
+                    <li>
+                      <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
+                    </li>
+                <% else %>
+                    <li>
+                      <%= link_to('Login', new_user_session_path)  %>
+                    </li>
+                <% end %>
+              </ul>
+            </nav>
+          </div>
+        </div>
+
+        <div id="content" class="col-xs-9">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
